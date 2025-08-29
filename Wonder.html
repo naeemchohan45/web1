@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven Wonders - Historical Monuments of the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    body {
+        color: #fff;
+        background-color: #303841;
+    }
+    a {
+    text-decoration: none;
+    color: inherit;
+   }
+
+ul{
+    list-style: none;
+    }
+
+    
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        color: whitesmoke;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 0 15px;
+    }
+
+    .logo {
+        height: 60px;
+        width: auto;
+    }
+
+    .active {
+        color: #fc036b;
+        font-weight: bold;
+    }
+
+    .ctn {
+        padding: 8px 15px;
+        background: #fc036b;
+        border-radius: 30px;
+        color: whitesmoke;
+        display: inline-block;
+    }
+    .ctn:hover {
+        background: #2980b9;
+    }
+    .menu-btn {
+        display: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    
+    header {
+        height: 60vh;
+        width: 100%;
+        background-image: url('./img/historical_monuments.png');
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .header-content {
+        color: whitesmoke;
+        text-align: center;
+        z-index: 10;
+        padding: 20px;
+    }
+
+    .header-content h2 {
+        font-size: 4vmin;
+    }
+
+    .line {
+        width: 150px;
+        height: 5px;
+        background: #fc036b;
+        margin: 10px auto;
+        border-radius: 5px;
+    }
+
+    .header-content h1 {
+        font-size: 7vmin;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    
+    .wonders-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 3em auto;
+        padding: 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1em;
+        color: #fff;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #a8b2bd;
+        font-size: 1.2rem;
+        margin-bottom: 3em;
+        line-height: 1.6;
+    }
+
+    
+    .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2em;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tab-btn {
+        padding: 12px 25px;
+        background: #3a4750;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .tab-btn.active-tab {
+        background: #fc036b;
+        font-weight: bold;
+    }
+
+    .tab-btn:hover:not(.active-tab) {
+        background: #46525c;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .tab-content.active-tab {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    
+    .wonders-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2em;
+    }
+
+    .wonder-card {
+        background: #3a4750;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+
+    .wonder-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .wonder-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .wonder-content {
+        padding: 1.5em;
+    }
+
+    .wonder-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+        color: #fff;
+    }
+
+    .wonder-location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #fc036b;
+        margin-bottom: 1em;
+        font-size: 0.9rem;
+    }
+
+    .wonder-description {
+        color: #a8b2bd;
+        line-height: 1.6;
+        margin-bottom: 1.5em;
+    }
+
+    .wonder-facts {
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid #444;
+    }
+
+    .fact-item {
+        display: flex;
+        margin-bottom: 0.8em;
+    }
+
+    .fact-icon {
+        color: #fc036b;
+        margin-right: 10px;
+        min-width: 20px;
+    }
+
+    .fact-text {
+        color: #a8b2bd;
+        font-size: 0.9rem;
+    }
+
+    
+    @media (max-width: 850px) {
+        .navbar {
+            padding: 15px;
+        }
+        
+        .menu-btn {
+            display: block;
+        }
+        
+        .nav-links {
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(72, 72, 114, 0.9);
+            transition: all 0.5s ease;
+            padding-top: 30px;
+        }
+        
+        .nav-links li {
+            margin: 20px 0;
+        }
+        
+        .mobile-menu {
+            left: 0;
+        }
+        
+        .logo {
+            height: 50px;
+        }
+        
+        header {
+            height: 30vh;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .wonders-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .tabs {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img src="img/logo original.png" alt="Logo" class="logo"></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="Wonder.html">Seven Wonders</a></li>
+            <li><a href="Gallery.html">Gallery</a></li>
+            <li><a href="Feedback.html">Feedback</a></li>
+            <li class="ctn"><a href="ContactUs.html">Contact Us</a></li>
+        </ul>
+        <i class="fa-solid fa-bars menu-btn"></i>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h2>Marvels of Human Achievement</h2>
+            <div class="line"></div>
+            <h1>The Seven Wonders of the World</h1>
+        </div>
+    </header>
+
+    <div class="wonders-container">
+        <h1 class="section-title">Explore All Categories of Wonders</h1>
+        <p class="section-subtitle">Discover the most extraordinary constructions from different eras and natural formations that continue to inspire awe.</p>
+
+        
+        <div class="tabs">
+            <button class="tab-btn active-tab" onclick="openTab('ancient')">Ancient Wonders</button>
+            <button class="tab-btn" onclick="openTab('new')">New Wonders</button>
+            <button class="tab-btn" onclick="openTab('natural')">Natural Wonders</button>
+        </div>
+
+        
+        <div id="ancient" class="tab-content active-tab">
+            <div class="wonders-grid">
+                <div class="wonder-card">
+                    <img src="img/Pyramids of Giza, Egypt.jpg" alt="Great Pyramid of Giza" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Great Pyramid of Giza</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Giza, Egypt</span>
+                        </div>
+                        <p class="wonder-description">The oldest and only surviving wonder of the ancient world, built as a tomb for Pharaoh Khufu around 2560 BCE.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: ~2560 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-combined fact-icon"></i>
+                                <span class="fact-text">Height: 146.6m (481 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-history fact-icon"></i>
+                                <span class="fact-text">Age: ~4,500 years</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Hanging Gardens of Babylon.jpg" alt="Hanging Gardens of Babylon" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Hanging Gardens of Babylon</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Babylon (Iraq)</span>
+                        </div>
+                        <p class="wonder-description">A legendary terraced garden complex said to have been built by King Nebuchadnezzar II for his homesick wife.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: ~600 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-leaf fact-icon"></i>
+                                <span class="fact-text">Marvel of irrigation engineering</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-question fact-icon"></i>
+                                <span class="fact-text">Exact location unknown</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Statue of Zeus at Olympia.jpg" alt="Statue of Zeus at Olympia" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Statue of Zeus at Olympia</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Olympia, Greece</span>
+                        </div>
+                        <p class="wonder-description">A giant seated figure of Zeus, about 13m tall, made by the Greek sculptor Phidias around 435 BCE.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: ~435 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-monument fact-icon"></i>
+                                <span class="fact-text">Made of ivory and gold plates</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-fire fact-icon"></i>
+                                <span class="fact-text">Destroyed in 5th century CE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Temple of Artemis.jpg" alt="Temple of Artemis at Ephesus" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Temple of Artemis</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ephesus (Turkey)</span>
+                        </div>
+                        <p class="wonder-description">A Greek temple dedicated to the goddess Artemis, rebuilt three times before its final destruction in 401 CE.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">First built: ~550 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-columns fact-icon"></i>
+                                <span class="fact-text">127 marble columns</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-fire fact-icon"></i>
+                                <span class="fact-text">Destroyed by Herostratus in 356 BCE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Mausoleum at Halicarnassus.png" alt="Mausoleum at Halicarnassus" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Mausoleum at Halicarnassus</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bodrum, Turkey</span>
+                        </div>
+                        <p class="wonder-description">A tomb built between 353-350 BCE for Mausolus, a satrap in the Persian Empire, by his wife Artemisia.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 353-350 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-tombstone fact-icon"></i>
+                                <span class="fact-text">Origin of the word "mausoleum"</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-earth-asia fact-icon"></i>
+                                <span class="fact-text">Stood for 16 centuries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Colossus of Rhodes.jpg" alt="Colossus of Rhodes" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Colossus of Rhodes</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rhodes, Greece</span>
+                        </div>
+                        <p class="wonder-description">A giant statue of the sun god Helios, erected to celebrate Rhodes' victory over Cyprus in 305 BCE.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 292-280 BCE</span>
+                            </div>
+                            <div class="fact-icon">
+                                <i class="fas fa-ruler-vertical"></i>
+                                <span class="fact-text">Height: ~33m (108 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-hourglass-end fact-icon"></i>
+                                <span class="fact-text">Destroyed in 226 BCE earthquake</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Lighthouse of Alexandria.jpg" alt="Lighthouse of Alexandria" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Lighthouse of Alexandria</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Alexandria, Egypt</span>
+                        </div>
+                        <p class="wonder-description">A lighthouse built by the Ptolemaic Kingdom between 280-247 BCE, one of the tallest man-made structures for many centuries.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 280-247 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-lightbulb fact-icon"></i>
+                                <span class="fact-text">First lighthouse in the world</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Height: ~100m (330 ft)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="new" class="tab-content">
+            <div class="wonders-grid">
+                <div class="wonder-card">
+                    <img src="img/Great Wall of China.jpg" alt="Great Wall of China" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Great Wall of China</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>China</span>
+                        </div>
+                        <p class="wonder-description">A series of fortifications made of stone, brick, tamped earth, wood, and other materials, built along China's historical northern borders.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 7th century BCE onward</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-horizontal fact-icon"></i>
+                                <span class="fact-text">Length: 21,196 km (13,171 mi)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-shield-alt fact-icon"></i>
+                                <span class="fact-text">Built for protection from invasions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Petra, Jordan.jpg" alt="Petra" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Petra</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jordan</span>
+                        </div>
+                        <p class="wonder-description">The "Rose City" carved directly into vibrant red sandstone cliffs, was the capital of the Nabatean Kingdom around 300 BCE.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Established: ~300 BCE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-mountain fact-icon"></i>
+                                <span class="fact-text">Carved into sandstone cliffs</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-water fact-icon"></i>
+                                <span class="fact-text">Advanced water system</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Christ the Redeemer, Brazil.jpg" alt="Christ the Redeemer" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Christ the Redeemer</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rio de Janeiro, Brazil</span>
+                        </div>
+                        <p class="wonder-description">An Art Deco statue of Jesus Christ created by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Completed: 1931</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Height: 30m (98 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-hands-praying fact-icon"></i>
+                                <span class="fact-text">Symbol of Christianity worldwide</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Machu Picchu, Peru.jpg" alt="Machu Picchu" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Machu Picchu</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Cusco Region, Peru</span>
+                        </div>
+                        <p class="wonder-description">A 15th-century Inca citadel situated on a mountain ridge 2,430 meters above sea level, often called the "Lost City of the Incas".</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: ~1450 CE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-mountain fact-icon"></i>
+                                <span class="fact-text">Elevation: 2,430m (7,970 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-compass fact-icon"></i>
+                                <span class="fact-text">Aligns with astronomical events</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Chichen Itza, Mexico.jpg" alt="Chichen Itza" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Chichen Itza</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Yucatán, Mexico</span>
+                        </div>
+                        <p class="wonder-description">A large pre-Columbian city built by the Maya people, featuring the iconic stepped pyramid El Castillo (Temple of Kukulcan).</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: ~600-900 CE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-sun fact-icon"></i>
+                                <span class="fact-text">Astronomical alignments</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-stairs fact-icon"></i>
+                                <span class="fact-text">91 steps on each side (total 364 + platform = 365)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Colosseum, Italy.jpg" alt="Roman Colosseum" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Roman Colosseum</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rome, Italy</span>
+                        </div>
+                        <p class="wonder-description">An oval amphitheater in the center of Rome, used for gladiatorial contests and public spectacles in ancient times.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 70-80 CE</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-users fact-icon"></i>
+                                <span class="fact-text">Capacity: 50,000-80,000</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-landmark fact-icon"></i>
+                                <span class="fact-text">Largest amphitheater ever built</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <div class="wonder-card">
+                    <img src="img/Taj Mahal, India.jpg" alt="Taj Mahal" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Taj Mahal</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Agra, India</span>
+                        </div>
+                        <p class="wonder-description">An ivory-white marble mausoleum commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Built: 1632-1653</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-users fact-icon"></i>
+                                <span class="fact-text">20,000 artisans worked on it</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-gem fact-icon"></i>
+                                <span class="fact-text">Made of white marble with precious stone inlays</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="natural" class="tab-content">
+            <div class="wonders-grid">
+                <div class="wonder-card">
+                    <img src="img/Grand Canyon.jpg" alt="Grand Canyon" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Grand Canyon</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Arizona, USA</span>
+                        </div>
+                        <p class="wonder-description">A steep-sided canyon carved by the Colorado River, revealing layers of rock that date back 2 billion years.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-horizontal fact-icon"></i>
+                                <span class="fact-text">Length: 446 km (277 mi)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Depth: 1.8 km (1.1 mi)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-clock fact-icon"></i>
+                                <span class="fact-text">Formed over 5-6 million years</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Great Barrier Reef.jpg" alt="Great Barrier Reef" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Great Barrier Reef</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Coral Sea, Australia</span>
+                        </div>
+                        <p class="wonder-description">The world's largest coral reef system composed of over 2,900 individual reefs and 900 islands stretching over 2,300 km.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-horizontal fact-icon"></i>
+                                <span class="fact-text">Length: 2,300 km (1,400 mi)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-fish fact-icon"></i>
+                                <span class="fact-text">Home to 1,500+ fish species</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-eye fact-icon"></i>
+                                <span class="fact-text">Visible from space</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Aurora Borealis.jpg" alt="Aurora Borealis" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Aurora Borealis</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Arctic Regions</span>
+                        </div>
+                        <p class="wonder-description">Natural light display in Earth's sky, predominantly seen in high-latitude regions around the Arctic and Antarctic.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-atom fact-icon"></i>
+                                <span class="fact-text">Caused by solar wind particles</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-palette fact-icon"></i>
+                                <span class="fact-text">Colors: green, pink, red, yellow, blue</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-day fact-icon"></i>
+                                <span class="fact-text">Best seen Sept-April</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Mount Everest.jpg" alt="Mount Everest" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Mount Everest</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nepal/China border</span>
+                        </div>
+                        <p class="wonder-description">Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Height: 8,848.86 m (29,032 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-mountain fact-icon"></i>
+                                <span class="fact-text">Grows ~4mm per year</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">First climbed: 1953</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Victoria Falls.jpg" alt="Victoria Falls" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Victoria Falls</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Zambia/Zimbabwe</span>
+                        </div>
+                        <p class="wonder-description">A waterfall on the Zambezi River at the border between Zambia and Zimbabwe, known for being the world's largest sheet of falling water.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-horizontal fact-icon"></i>
+                                <span class="fact-text">Width: 1,708 m (5,604 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Height: 108 m (354 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-water fact-icon"></i>
+                                <span class="fact-text">Local name: "The Smoke That Thunders"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Parícutin Volcano.jpg" alt="Parícutin Volcano" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Parícutin Volcano</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Michoacán, Mexico</span>
+                        </div>
+                        <p class="wonder-description">A cinder cone volcano that suddenly appeared in a cornfield in 1943 and grew to 424 meters in 8 years.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-calendar-alt fact-icon"></i>
+                                <span class="fact-text">Appeared: February 20, 1943</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ruler-vertical fact-icon"></i>
+                                <span class="fact-text">Final height: 424 m (1,391 ft)</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-fire fact-icon"></i>
+                                <span class="fact-text">Last erupted: 1952</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="wonder-card">
+                    <img src="img/Harbor of Rio de Janeiro.jpg" alt="Harbor of Rio de Janeiro" class="wonder-img">
+                    <div class="wonder-content">
+                        <h3 class="wonder-title">Harbor of Rio de Janeiro</h3>
+                        <div class="wonder-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rio de Janeiro, Brazil</span>
+                        </div>
+                        <p class="wonder-description">A stunning natural bay surrounded by dramatic granite mountains including Sugarloaf Mountain and Corcovado Peak.</p>
+                        <div class="wonder-facts">
+                            <div class="fact-item">
+                                <i class="fas fa-anchor fact-icon"></i>
+                                <span class="fact-text">One of the world's largest bays</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-mountain fact-icon"></i>
+                                <span class="fact-text">Surrounded by granite peaks</span>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fas fa-ship fact-icon"></i>
+                                <span class="fact-text">Discovered by Portuguese in 1502</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function openTab(tabName) {
+            
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active-tab');
+            }
+
+            
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active-tab');
+            }
+
+            
+            document.getElementById(tabName).classList.add('active-tab');
+            event.currentTarget.classList.add('active-tab');
+        }
+
+        
+        const menuBtn = document.querySelector('.menu-btn')
+        const navlinks = document.querySelector('.nav-links')
+
+        menuBtn.addEventListener('click',()=>{
+            navlinks.classList.toggle('mobile-menu')
+        })
+    </script>
+</body>
+</html>

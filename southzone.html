@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Southern Monuments - Historical Monuments of the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        color: #fff;
+        background-color: #303841;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    ul{
+        list-style: none;
+    }
+
+    .active {
+        color: #fc036b;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        color: whitesmoke;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .nav-links{
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links li{
+        margin: 0 15px;
+    }
+
+    .logo {
+        height: 60px;
+        width: auto;
+    }
+
+    header {
+        height: 60vh;
+        width: 100%;
+        background-image: url('./img/historical_monuments.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .header-content {
+        color: whitesmoke;
+        text-align: center;
+        z-index: 10;
+        padding: 20px;
+    }
+
+    .header-content h2{
+        font-size: 4vmin;
+    }
+
+    .line{
+        width: 150px;
+        height: 5px;
+        background: #fc036b; 
+        margin: 10px auto;
+        border-radius: 5px;
+    }
+
+    .header-content h1{
+        font-size: 7vmin;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .ctn{
+        padding: 8px 15px;
+        background: #fc036b; 
+        border-radius: 30px;
+        color: whitesmoke;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .ctn:hover {
+        background: #2980b9;
+    }
+
+    .menu-btn{
+        display: none;
+        width: 40px;
+        cursor: pointer;
+        color: white;
+        font-size: 24px;
+    }
+    .zone-explorer {
+  padding: 60px 20px;
+  text-align: center;
+  background: #3a4750;
+}
+
+.zone-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.zone-btn {
+  padding: 30px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.zone-btn i {
+  font-size: 2.5rem;
+}
+
+
+.north-zone { background: #3498db; }  
+.south-zone { background: #2ecc71; }  
+.east-zone  { background: #e74c3c; }  
+.west-zone  { background: #f39c12; }  
+
+
+.north-zone:hover { 
+  background: #2980b9;
+  transform: translateY(-5px);
+}
+.south-zone:hover { 
+  background: #27ae60;
+  transform: translateY(-5px);
+}
+.east-zone:hover  { 
+  background: #c0392b;
+  transform: translateY(-5px);
+}
+.west-zone:hover  { 
+  background: #d35400;
+  transform: translateY(-5px);
+}
+
+    .monuments-section {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1em;
+        color: #fff;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #a8b2bd;
+        font-size: 1.2rem;
+        margin-bottom: 3em;
+        line-height: 1.6;
+    }
+
+    .monuments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+    }
+
+    .monument-card {
+        background: #3a4750;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+
+    .monument-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .monument-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .monument-content {
+        padding: 1.5em;
+    }
+
+    .monument-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+        color: #fff;
+    }
+
+    .monument-location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #3498db; 
+        margin-bottom: 1em;
+        font-size: 0.9rem;
+    }
+
+    .monument-description {
+        color: #a8b2bd;
+        line-height: 1.6;
+        margin-bottom: 1.5em;
+    }
+
+    .monument-facts {
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid #444;
+    }
+
+    .fact-item {
+        display: flex;
+        margin-bottom: 0.8em;
+    }
+
+    .fact-icon {
+        color: #3498db; 
+        margin-right: 10px;
+        min-width: 20px;
+    }
+
+    .fact-text {
+        color: #a8b2bd;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px){
+        .navbar{
+            padding: 15px;
+        }
+        
+        .menu-btn{
+            display: block;
+        }
+        
+        .nav-links{
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(72, 72, 114, 0.9);
+            transition: all 0.5s ease;
+            padding-top: 30px;
+        }
+        
+        .nav-links li{
+            margin: 20px 0;
+        }
+        
+        .mobile-menu {
+            left: 0;
+        }
+        
+        .logo {
+            height: 50px;
+        }
+        
+        header {
+            height: 40vh;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img src="img/logo original.png" alt="Logo" class="logo"></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Wonder.html">Seven Wonders</a></li>
+            <li><a href="Gallery.html">Gallery</a></li>
+            <li><a href="Feedback.html">Feedback</a></li>
+            <li class="ctn"><a href="ContactUs.html">Contact Us</a></li>
+        </ul>
+        <i class="fa-solid fa-bars menu-btn"></i>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h2>Southern Hemisphere Wonders</h2>
+            <div class="line"></div>
+            <h1>Monuments of the South Zone</h1>
+            <a href="Wonder.html" class="ctn">Explore Monuments</a>
+        </div>
+    </header>
+    <section class="zone-explorer">
+  <div class="title">
+    <h1>Explore by Zone</h1>
+    <div class="line"></div>
+    <p>Discover monuments by geographical region</p>
+  </div>
+
+  <div class="zone-buttons">
+    <a href="northzone.html" class="zone-btn north-zone">
+      <i class="fas fa-mountain"></i>
+      <span>North Zone</span>
+    </a>
+    
+    <a href="southzone.html" class="zone-btn south-zone active">
+      <i class="fas fa-umbrella-beach"></i>
+      <span>South Zone</span>
+    </a>
+    
+    <a href="eastzone.html" class="zone-btn east-zone">
+      <i class="fas fa-sun"></i>
+      <span>East Zone</span>
+    </a>
+    
+    <a href="westzone.html" class="zone-btn west-zone">
+      <i class="fas fa-desert"></i>
+      <span>West Zone</span>
+    </a>
+  </div>
+</section>
+
+    <section class="monuments-section" id="monuments">
+        <h1 class="section-title">Southern Monuments</h1>
+        <p class="section-subtitle">Discover the most iconic historical monuments from the southern regions of the world.</p>
+
+        <div class="monuments-grid">
+            
+            <div class="monument-card">
+                <img src="img/Machu Picchu, Peru.jpg" alt="Machu Picchu" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Machu Picchu</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Peru</span>
+                    </div>
+                    <p class="monument-description">A 15th-century Inca citadel located in the Eastern Cordillera of southern Peru, often called the "Lost City of the Incas".</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: c. 1450</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-ruler-horizontal fact-icon"></i>
+                            <span class="fact-text">Elevation: 2,430m (7,970 ft)</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-history fact-icon"></i>
+                            <span class="fact-text">Abandoned during Spanish conquest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Christ the Redeemer, Brazil.jpg" alt="Christ the Redeemer" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Christ the Redeemer</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Rio de Janeiro, Brazil</span>
+                    </div>
+                    <p class="monument-description">An Art Deco statue of Jesus Christ in Rio de Janeiro, standing 30 meters tall on top of the 700-meter Corcovado mountain.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1922-1931</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-ruler-vertical fact-icon"></i>
+                            <span class="fact-text">Height: 30m (98 ft)</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-bolt fact-icon"></i>
+                            <span class="fact-text">Struck by lightning multiple times</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Moai Statues, Easter Island.jpg" alt="Easter Island Moai" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Easter Island Moai</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Easter Island, Chile</span>
+                    </div>
+                    <p class="monument-description">Monolithic human figures carved by the Rapa Nui people between 1250 and 1500 CE, representing deified ancestors.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1250-1500 CE</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-weight-hanging fact-icon"></i>
+                            <span class="fact-text">Average weight: 14 tons</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-question fact-icon"></i>
+                            <span class="fact-text">Transport method remains debated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Sydney Opera House, Australia.jpg" alt="Sydney Opera House" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Sydney Opera House</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Sydney, Australia</span>
+                    </div>
+                    <p class="monument-description">A multi-venue performing arts center famous for its distinctive shell-like design, recognized as a masterpiece of modern architecture.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1959-1973</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-chess-rook fact-icon"></i>
+                            <span class="fact-text">Roof: 1,056,006 tiles</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-landmark fact-icon"></i>
+                            <span class="fact-text">UNESCO World Heritage Site</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Angkor Wat, Cambodia.jpg" alt="Angkor Wat" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Angkor Wat</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Siem Reap, Cambodia</span>
+                    </div>
+                    <p class="monument-description">The largest religious monument in the world, originally constructed as a Hindu temple dedicated to Vishnu, later transforming into a Buddhist temple.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 12th century</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-chess-board fact-icon"></i>
+                            <span class="fact-text">Area: 162.6 hectares</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-temple fact-icon"></i>
+                            <span class="fact-text">Largest religious structure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/great zimbabwe.jpg" alt="Great Zimbabwe" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Great Zimbabwe</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Zimbabwe</span>
+                    </div>
+                    <p class="monument-description">A medieval city in the south-eastern hills of Zimbabwe, built by the Bantu civilization between the 11th and 15th centuries.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 11th-15th century</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-ruler-horizontal fact-icon"></i>
+                            <span class="fact-text">Covered 7.22 km² at peak</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-users fact-icon"></i>
+                            <span class="fact-text">Population: 18,000 at peak</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div class="monument-card">
+                <img src="img/Petra, Jordan.jpg" alt="Petra" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Petra</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jordan</span>
+                    </div>
+                    <p class="monument-description">An ancient Nabataean city famous for its rock-cut architecture and water conduit system, known as the "Rose City" for the color of its stone.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Established: 5th century BCE</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-door-open fact-icon"></i>
+                            <span class="fact-text">Al-Khazneh is most famous structure</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-tint fact-icon"></i>
+                            <span class="fact-text">Advanced water management system</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn')
+        const navlinks = document.querySelector('.nav-links')
+
+        menuBtn.addEventListener('click',()=>{
+            navlinks.classList.toggle('mobile-menu')
+        })
+    </script>
+</body>
+</html>

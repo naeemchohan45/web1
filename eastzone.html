@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Monuments - Historical Monuments of the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        color: #fff;
+        background-color: #303841;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    ul{
+        list-style: none;
+    }
+
+    .active {
+        color: #fc036b;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        color: whitesmoke;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .nav-links{
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links li{
+        margin: 0 15px;
+    }
+
+    .logo {
+        height: 60px;
+        width: auto;
+    }
+
+    header {
+        height: 60vh;
+        width: 100%;
+        background-image: url('./img/historical_monuments.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .header-content {
+        color: whitesmoke;
+        text-align: center;
+        z-index: 10;
+        padding: 20px;
+    }
+
+    .header-content h2{
+        font-size: 4vmin;
+    }
+
+    .line{
+        width: 150px;
+        height: 5px;
+        background: #fc036b; 
+        margin: 10px auto;
+        border-radius: 5px;
+    }
+
+    .header-content h1{
+        font-size: 7vmin;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .ctn{
+        padding: 8px 15px;
+        background: #fc036b; 
+        border-radius: 30px;
+        color: whitesmoke;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .ctn:hover {
+        background: #2980b9;
+    }
+
+    .menu-btn{
+        display: none;
+        width: 40px;
+        cursor: pointer;
+        color: white;
+        font-size: 24px;
+    }
+    .zone-explorer {
+  padding: 60px 20px;
+  text-align: center;
+  background: #3a4750;
+}
+
+.zone-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.zone-btn {
+  padding: 30px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.zone-btn i {
+  font-size: 2.5rem;
+}
+
+
+.north-zone { background: #3498db; }  
+.south-zone { background: #2ecc71; }  
+.east-zone  { background: #e74c3c; }  
+.west-zone  { background: #f39c12; }  
+
+
+.north-zone:hover { 
+  background: #2980b9;
+  transform: translateY(-5px);
+}
+.south-zone:hover { 
+  background: #27ae60;
+  transform: translateY(-5px);
+}
+.east-zone:hover  { 
+  background: #c0392b;
+  transform: translateY(-5px);
+}
+.west-zone:hover  { 
+  background: #d35400;
+  transform: translateY(-5px);
+}
+
+    .monuments-section {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1em;
+        color: #fff;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #a8b2bd;
+        font-size: 1.2rem;
+        margin-bottom: 3em;
+        line-height: 1.6;
+    }
+
+    .monuments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+    }
+
+    .monument-card {
+        background: #3a4750;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+
+    .monument-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .monument-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .monument-content {
+        padding: 1.5em;
+    }
+
+    .monument-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+        color: #fff;
+    }
+
+    .monument-location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #3498db; 
+        margin-bottom: 1em;
+        font-size: 0.9rem;
+    }
+
+    .monument-description {
+        color: #a8b2bd;
+        line-height: 1.6;
+        margin-bottom: 1.5em;
+    }
+
+    .monument-facts {
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid #444;
+    }
+
+    .fact-item {
+        display: flex;
+        margin-bottom: 0.8em;
+    }
+
+    .fact-icon {
+        color: #3498db; 
+        margin-right: 10px;
+        min-width: 20px;
+    }
+
+    .fact-text {
+        color: #a8b2bd;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px){
+        .navbar{
+            padding: 15px;
+        }
+        
+        .menu-btn{
+            display: block;
+        }
+        
+        .nav-links{
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(72, 72, 114, 0.9);
+            transition: all 0.5s ease;
+            padding-top: 30px;
+        }
+        
+        .nav-links li{
+            margin: 20px 0;
+        }
+        
+        .mobile-menu {
+            left: 0;
+        }
+        
+        .logo {
+            height: 50px;
+        }
+        
+        header {
+            height: 40vh;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img src="img/logo original.png" alt="Logo" class="logo"></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Wonder.html">Seven Wonders</a></li>
+            <li><a href="Gallery.html">Gallery</a></li>
+            <li><a href="Feedback.html">Feedback</a></li>
+            <li class="ctn"><a href="ContactUs.html">Contact Us</a></li>
+        </ul>
+        <i class="fa-solid fa-bars menu-btn"></i>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h2>Eastern Hemisphere Wonders</h2>
+            <div class="line"></div>
+            <h1>Monuments of the East Zone</h1>
+            <a href="Wonder.html" class="ctn">Explore Monuments</a>
+        </div>
+    </header>
+    <section class="zone-explorer">
+  <div class="title">
+    <h1>Explore by Zone</h1>
+    <div class="line"></div>
+    <p>Discover monuments by geographical region</p>
+  </div>
+
+  <div class="zone-buttons">
+    <a href="northzone.html" class="zone-btn north-zone">
+      <i class="fas fa-mountain"></i>
+      <span>North Zone</span>
+    </a>
+    
+    <a href="southzone.html" class="zone-btn south-zone">
+      <i class="fas fa-umbrella-beach"></i>
+      <span>South Zone</span>
+    </a>
+    
+    <a href="eastzone.html" class="zone-btn east-zone active">
+      <i class="fas fa-sun"></i>
+      <span>East Zone</span>
+    </a>
+    
+    <a href="westzone.html" class="zone-btn west-zone">
+      <i class="fas fa-desert"></i>
+      <span>West Zone</span>
+    </a>
+  </div>
+</section>
+
+    <section class="monuments-section" id="monuments">
+        <h1 class="section-title">Eastern Monuments</h1>
+        <p class="section-subtitle">Discover the most iconic historical monuments from the eastern regions of the world.</p>
+
+        <div class="monuments-grid">
+            
+            <div class="monument-card">
+                <img src="img/Great Wall of China.jpg" alt="Great Wall of China" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Great Wall of China</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>China</span>
+                    </div>
+                    <p class="monument-description">The longest wall in the world, stretching over 21,000 km, built over centuries to protect Chinese states from invasions.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 7th century BCE onwards</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-ruler-horizontal fact-icon"></i>
+                            <span class="fact-text">Length: 21,196 km (13,171 mi)</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-history fact-icon"></i>
+                            <span class="fact-text">Construction lasted 2,000+ years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Taj Mahal, India.jpg" alt="Taj Mahal" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Taj Mahal</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Agra, India</span>
+                    </div>
+                    <p class="monument-description">An ivory-white marble mausoleum commissioned in 1632 by Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1632-1653</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-users fact-icon"></i>
+                            <span class="fact-text">Workers: 20,000 artisans</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-gem fact-icon"></i>
+                            <span class="fact-text">Materials from across Asia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Angkor Wat, Cambodia.jpg" alt="Angkor Wat" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Angkor Wat</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Siem Reap, Cambodia</span>
+                    </div>
+                    <p class="monument-description">The largest religious monument in the world, originally constructed as a Hindu temple dedicated to Vishnu, later transforming into a Buddhist temple.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 12th century</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-chess-board fact-icon"></i>
+                            <span class="fact-text">Area: 162.6 hectares</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-temple fact-icon"></i>
+                            <span class="fact-text">Largest religious structure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Borobudur, Indonesia.jpg" alt="Borobudur" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Borobudur</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Java, Indonesia</span>
+                    </div>
+                    <p class="monument-description">The world's largest Buddhist temple, featuring nine stacked platforms, six square and three circular, topped by a central dome.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 9th century</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-bell fact-icon"></i>
+                            <span class="fact-text">504 Buddha statues</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-mountain fact-icon"></i>
+                            <span class="fact-text">Built as a giant stupa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Potala Palace.jpg" alt="Potala Palace" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Potala Palace</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Lhasa, Tibet</span>
+                    </div>
+                    <p class="monument-description">The winter palace of the Dalai Lama since the 7th century, standing at 3,700 meters above sea level on Marpo Ri hill.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1645-1694</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-building fact-icon"></i>
+                            <span class="fact-text">13 stories, 1,000 rooms</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-ruler-vertical fact-icon"></i>
+                            <span class="fact-text">Height: 117m (384 ft)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="monument-card">
+                <img src="img/Petra, Jordan.jpg" alt="Petra" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Petra</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jordan</span>
+                    </div>
+                    <p class="monument-description">An ancient Nabataean city famous for its rock-cut architecture and water conduit system, known as the "Rose City" for the color of its stone.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Established: 5th century BCE</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-door-open fact-icon"></i>
+                            <span class="fact-text">Al-Khazneh is most famous structure</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-tint fact-icon"></i>
+                            <span class="fact-text">Advanced water management system</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div class="monument-card">
+                <img src="img/Himeji Castle.jpg" alt="Himeji Castle" class="monument-img">
+                <div class="monument-content">
+                    <h3 class="monument-title">Himeji Castle</h3>
+                    <div class="monument-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Himeji, Japan</span>
+                    </div>
+                    <p class="monument-description">A hilltop Japanese castle complex comprising 83 buildings with advanced defensive systems from the feudal period.</p>
+                    <div class="monument-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-calendar-alt fact-icon"></i>
+                            <span class="fact-text">Built: 1333-1346</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-chess-rook fact-icon"></i>
+                            <span class="fact-text">Known as "White Heron Castle"</span>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-shield-alt fact-icon"></i>
+                            <span class="fact-text">Never destroyed by war or earthquake</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn')
+        const navlinks = document.querySelector('.nav-links')
+
+        menuBtn.addEventListener('click',()=>{
+            navlinks.classList.toggle('mobile-menu')
+        })
+    </script>
+</body>
+</html>
